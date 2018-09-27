@@ -1,0 +1,62 @@
+<div class="main-content  mt-4">
+    <div class="container">
+
+        <h1 style="text-align: center;">Dashboard</h1>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">A</i>
+                    </div>
+                    <h4 class="card-title">Artistes</h4>
+                  </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                          <input type="text" [(ngModel)]="newArtist.nameArtist">
+                          <button mat-raised-button mat-min-fab class="btn btn-primary btn-round btn-fab" (click)="generateArtist()">
+                          <i class="material-icons">
+                            add
+                          </i>
+                          </button>
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables" *ngIf="dataArtists">
+                          <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                <thead *ngIf="dataArtists">
+                                    <tr>
+                                      <th>{{ dataArtists.headerRow[0] }}</th>
+                                      <th class="disabled-sorting text-right">{{ dataArtists.headerRow[1] }}</th>
+                                    </tr>
+                                </thead>
+                                <tfoot *ngIf="dataArtists">
+                                    <tr>
+                                      <th>{{ dataArtists.footerRow[0] }}</th>
+                                      <th>{{ dataArtists.footerRow[1] }}</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody *ngIf="dataArtists" style="cursor: pointer;">
+                                    <tr *ngFor="let row of dataArtists.dataRows; let i = index;" (click)="selectArtiste(i)">
+                                        <td>{{row[0]}}</td>
+                                        <td>{{row[1]}}</td>
+
+                                        <td class="text-right">
+<!--                                           <a   class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">favorites</i></a>
+                                          <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
+                                          <a href="#" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+        </div>
+    </div>
+</div>
+

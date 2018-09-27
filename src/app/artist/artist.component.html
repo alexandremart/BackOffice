@@ -1,0 +1,115 @@
+<div class="main-content mt-4">
+    <div class="container">
+
+		<h1 *ngIf="artiste" style="text-align: center;">{{artiste.name}}</h1>
+
+		<button mat-raised-button class="btn btn-primary btn-round" [routerLink]="['/dash']">
+			<span class="btn-label">
+				<i class="material-icons">keyboard_arrow_left</i>
+			</span>
+			Back
+		</button>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">A</i>
+                    </div>
+                    <h4 class="card-title">Album</h4>
+                  </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                        	<input type="text" [(ngModel)]="newAlbum.albumName">
+    						<button mat-raised-button mat-min-fab class="btn btn-primary btn-round btn-fab" (click)="generateAlbum()">
+							<i class="material-icons">
+								add
+							</i>
+						</button>
+
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables" *ngIf="dataAlbums">
+                          <table *ngIf="dataAlbums" id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                <thead *ngIf="dataAlbums">
+                                    <tr>
+                                      <th>{{ dataAlbums.headerRow[0] }}</th>
+                                      <th>{{ dataAlbums.headerRow[1] }}</th>
+                                      <th>{{ dataAlbums.headerRow[2] }}</th>
+                                    </tr>
+                                </thead>
+                                <tfoot *ngIf="dataAlbums">
+                                    <tr>
+                                      <th>{{ dataAlbums.footerRow[0] }}</th>
+                                      <th>{{ dataAlbums.footerRow[1] }}</th>
+                                      <th>{{ dataAlbums.footerRow[2] }}</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody *ngIf="dataAlbums" style="cursor: pointer;">
+                                    <tr *ngFor="let row of dataAlbums.dataRows; let i = index" (click)="selectAlbum = i">
+                                        <td>{{row[0]}}</td>
+                                        <td>{{row[2]}}</td>
+                                        <td class="text-right">
+                                          <a data-toggle="modal" data-target="#addSongModal" class="btn btn-link btn-info btn-just-icon like" style="float: left;"><i class="material-icons">add</i></a>
+<!--                                           <a class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
+                                          <a class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="addSongModal" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="dataAlbums && dataAlbums.dataRows && selectAlbum >= 0" class="modal-title">Ajouter une chanson</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn-close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	Name : <input type="text" [(ngModel)]="name" name="">
+        <h4>Fichier : (.wav)</h4>
+        <input type="file" (change)="onFileSelected($event)" placeholder="" class="inputMD"
+          accept=".wav,audio/*" [(ngModel)]="songFile">
+
+        <h4>Upload progression</h4>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+            attr.aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" [style.width]="progress + '%'">
+            {{progress}} %
+          </div>
+        </div>
+
+      	<hr>
+
+      	<div *ngIf="dataAlbums && dataAlbums.dataRows && selectAlbum >= 0">
+	      	<h2 class="center">Les musiques de l'album</h2>
+	      	<div *ngFor="let song of dataAlbums.dataRows[selectAlbum][3]">
+	      		{{ song.title}}
+	      	</div>      		
+      	</div>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addSong(name)">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>

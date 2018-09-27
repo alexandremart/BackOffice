@@ -1,0 +1,38 @@
+
+<div class="wrapper wrapper-full-page">
+  <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('./assets/img/login.jpg'); background-size: cover; background-position: top center;">
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="container">
+      <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+          <div class="card card-login card-hidden">
+            <div class="card-body ">
+              <p class="card-description text-center">Log In</p>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">email</i>
+                    </span>
+                  </div>
+                  <input type="email" class="form-control" [(ngModel)]="username" placeholder="Email...">
+                </div>
+              </span>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">lock_outline</i>
+                    </span>
+                  </div>
+                  <input type="password" class="form-control"  [(ngModel)]="password" placeholder="Password...">
+                </div>
+              </span>
+            </div>
+            <div class="card-footer justify-content-center">
+              <a (click)="login(username, password)" class="btn btn-rose btn-link btn-lg">Lets Go</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
