@@ -75,7 +75,7 @@ export class ArtistsService {
 		let headers = new Headers({ 'Accept': 'application/json' });
 		headers.append('Authorization', `bearer ${authToken}`);
 		let options = new RequestOptions({ headers: headers });
-		return this.http.post(this.apiUrl + "/api/artist", data, options)
+		return this.http.post(this.apiUrl + "/api/artist/admin", data, options)
 		.map(response => {
 			return response.json();
 		},

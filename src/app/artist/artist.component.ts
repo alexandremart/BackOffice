@@ -21,7 +21,7 @@ export class ArtistComponent implements OnInit {
 		"albumName": "",
 		"artistName": "",
 		"id": "",
-		"imgAlbum": ""
+		"imgUrl": ""
 	}
 
 	selectAlbum;
@@ -41,7 +41,9 @@ export class ArtistComponent implements OnInit {
 	}	
 
 	generateAlbum() {
-		if (this.newAlbum.albumName === "" || this.newAlbum.albumName === undefined ||this.newAlbum.albumName === null) {
+		if (this.newAlbum.albumName === "" || this.newAlbum.albumName === undefined || this.newAlbum.albumName === null ||
+		this.newAlbum.imgUrl === "" || this.newAlbum.imgUrl === undefined || this.newAlbum.imgUrl === null
+		) {
 			swal({
 				title: "Erreur",
 				text: "Le nom de l'album est vide.",
@@ -50,7 +52,7 @@ export class ArtistComponent implements OnInit {
 				buttonsStyling: false,
 			  }).catch(swal.noop);
 		} else {
-			this.artist.generateAlbum(this.newAlbum).subscribe((data)=> {
+			this.artist.generateAlbum(this.newAlbum).subscribe((data) => {
 				swal({
 					title: "Good job!",
 					text: "Tu as créé un nouvel album!",
@@ -82,12 +84,12 @@ export class ArtistComponent implements OnInit {
 	    for (var i = this.artiste.albums.length - 1; i >= 0; i--) {
 	      this.artist.getAlbum(this.artiste.albums[i]).subscribe((Response) => {
 				let name = Response.name;
-				let row = [name, Response._id, Response.tracks.length , Response.tracks];
+				let row = [name, Response._id, Response.tracks.length , Response.tracks, Response.image];
 				this.dataAlbums.dataRows.push(row);
 	        });
 	      };
 		this.dataAlbums.dataRows.reverse();
-		console.log(this.dataAlbums.dataRows);     
+		console.log(this.dataAlbums.dataRows);
 	    });
 	}
 
@@ -109,6 +111,7 @@ export class ArtistComponent implements OnInit {
 		data.append("songName", name);
 		data.append("artistId", this.ArtistId);
 		data.append("albumId", this.dataAlbums.dataRows[this.selectAlbum][1]);
+		data.append("album", this.dataAlbums.dataRows[this.selectAlbum][0]);
 
 		var xhr = new XMLHttpRequest();
 		xhr.withCredentials = true;

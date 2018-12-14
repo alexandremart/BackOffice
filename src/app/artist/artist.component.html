@@ -1,6 +1,10 @@
 <div class="main-content mt-4">
   <div class="container">
-    <h1 *ngIf="artiste" style="text-align: center;">{{ artiste.name }}</h1>
+
+    <h1 *ngIf="artiste" style="text-align: center;">
+      {{ artiste.name }} 
+      <img *ngIf="artiste" height="75" height="75" src="{{ artiste.img }}">
+    </h1>
 
     <button
       mat-raised-button
@@ -23,7 +27,7 @@
           <div class="card-body">
             <div class="toolbar">
               <input type="text" style="border: none;border-bottom: 1px solid black;margin-right: 25px;width: 250px;" placeholder="Nom Album"  [(ngModel)]="newAlbum.albumName" />
-              <input type="text" style="border: none;border-bottom: 1px solid black;margin-right: 25px;width: 250px;" placeholder="Lien image album"  [(ngModel)]="newAlbum.imgAlbum">
+              <input type="text" style="border: none;border-bottom: 1px solid black;margin-right: 25px;width: 250px;" placeholder="Lien image album"  [(ngModel)]="newAlbum.imgUrl">
               <button
                 mat-raised-button
                 mat-min-fab
@@ -145,6 +149,7 @@
             {{ song.title }}
           </div>
         </div>
+        <img height="150" width="150" src="{{dataAlbums.dataRows[selectAlbum][4]}}">
       </div>
 
       <div class="modal-footer">

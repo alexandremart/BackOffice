@@ -25,7 +25,8 @@ export class DashboardComponent implements OnInit {
   dataArtists;
 
   newArtist = {
-    nameArtist: "",
+    nameArtist: '',
+    imgUrl: ''
   };
 
   constructor(public artist: ArtistsService, private route: Router) {}
