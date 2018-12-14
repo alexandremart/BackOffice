@@ -18,9 +18,10 @@ export class ArtistComponent implements OnInit {
 	artiste: any = [];
 	albums = [];
 	newAlbum = {
-		"albumName":"",
-		"artistName":"",
-		"id":""
+		"albumName": "",
+		"artistName": "",
+		"id": "",
+		"imgAlbum": ""
 	}
 
 	selectAlbum;
@@ -40,17 +41,27 @@ export class ArtistComponent implements OnInit {
 	}	
 
 	generateAlbum() {
-		this.artist.generateAlbum(this.newAlbum).subscribe((data)=> {
+		if (this.newAlbum.albumName === "" || this.newAlbum.albumName === undefined ||this.newAlbum.albumName === null) {
 			swal({
-				title: "Good job!",
-				text: "Tu as créé un nouvel album!",
+				title: "Erreur",
+				text: "Le nom de l'album est vide.",
+				type: "error",
+				confirmButtonClass: "btn btn-info",
 				buttonsStyling: false,
-				confirmButtonClass: "btn btn-success",
-				type: "success"
-			}).catch(swal.noop)
-			this.getDatas();
-		})
-		this.newAlbum.albumName = "";
+			  }).catch(swal.noop);
+		} else {
+			this.artist.generateAlbum(this.newAlbum).subscribe((data)=> {
+				swal({
+					title: "Good job!",
+					text: "Tu as créé un nouvel album!",
+					buttonsStyling: false,
+					confirmButtonClass: "btn btn-success",
+					type: "success"
+				}).catch(swal.noop)
+				this.getDatas();
+			})
+			this.newAlbum.albumName = "";
+		}
 	}
 
 	getDatas() {

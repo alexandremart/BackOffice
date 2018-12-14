@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  apiUrl: 'http://beta.soundnme.eu',
+  apiUrl: 'https://beta.soundnme.eu',
   // apiUrl: 'http://localhost:3000',
   production: false
 };
